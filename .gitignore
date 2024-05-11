@@ -1,0 +1,12 @@
+org-roam.db
+history
+.org-id-locations
+projectile-bookmarks.eld
+#back up files
+*~
+#auto save files
+#*#
+
+eln-cache/
+elpa/ 
+eshell/
