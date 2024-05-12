@@ -27,15 +27,54 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-(use-package tree-sitter
-  :config (tree-sitter-mode 1))
 
-(use-package tree-sitter-langs
-  :after tree-sitter)
+
+(use-package company
+    :ensure t
+    :init
+    (global-company-mode t)
+    :config
+    (setq company-idle-delay 0.5
+	company-minimum-prefix-length 2
+	company-show-numbers t))
+
+
+
+
+(use-package tree-sitter
+  :config
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+  )
+
+;(use-package tree-sitter-langs
+;  :after tree-sitter)
+(setq treesit-language-source-alist
+      '(
+	(elixir "https://github.com/elixir-lang/tree-sitter-elixir")
+	(heex "https://github.com/phoenixframework/tree-sitter-heex")
+	(bash "https://github.com/tree-sitter/tree-sitter-bash")
+     (cmake "https://github.com/uyha/tree-sitter-cmake")
+     (css "https://github.com/tree-sitter/tree-sitter-css")
+     (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+     (go "https://github.com/tree-sitter/tree-sitter-go")
+     (html "https://github.com/tree-sitter/tree-sitter-html")
+     (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+     (json "https://github.com/tree-sitter/tree-sitter-json")
+     (make "https://github.com/alemuller/tree-sitter-make")
+     (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+     (python "https://github.com/tree-sitter/tree-sitter-python")
+     (toml "https://github.com/tree-sitter/tree-sitter-toml")
+     (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+     (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+     (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
 
 (use-package eglot
   :config
-  (add-to-list 'eglot-server-programs '(elixir-mode  "/Users/ryan/dev/elixir-ls-v0.21.1/language_server.sh" )))
+    (add-to-list 'eglot-server-programs
+             '(elixir-mode "~/dev/lang-servers/elixir-ls/language_server.sh")))
+  ;;;:config
+  ;;(add-to-list 'eglot-server-programs '(elixir-mode  "/Users/ryan/dev/elixir-ls-v0.21.1/language_server.sh" )))
 
 (use-package elixir-mode
   :config
@@ -328,7 +367,12 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(tree-sitter-elixir web-mode heex-mode elixir-mode tree-sitter-langs tree-sitter elixir-ts-mode org-roam org-bullets magit projectile hydra general all-the-icons helpful which-key rainbow-delimiters evil-collection evil undo-fu consult orderless marginalia save-hist vertico doom-themes doom-modeline command-log command-log-mode)))
+   '(all-the-icons command-log-mode company consult doom-modeline
+		   doom-themes elixir-mode evil-collection general
+		   helpful hydra magit marginalia orderless
+		   org-bullets org-roam projectile rainbow-delimiters
+		   tree-sitter-langs undo-fu vertico web-mode
+		   which-key)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

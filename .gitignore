@@ -2,6 +2,8 @@ org-roam.db
 history
 .org-id-locations
 projectile-bookmarks.eld
+projects
+transient
 #back up files
 *~
 #auto save files
